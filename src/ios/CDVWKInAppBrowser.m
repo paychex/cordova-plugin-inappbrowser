@@ -752,6 +752,7 @@ BOOL isExiting = FALSE;
     
     //WKWebView options
     configuration.allowsInlineMediaPlayback = _browserOptions.allowinlinemediaplayback;
+    configuration.preferences.javaScriptCanOpenWindowsAutomatically = true;
     if (IsAtLeastiOSVersion(@"10.0")) {
         configuration.ignoresViewportScaleLimits = _browserOptions.enableviewportscale;
         if(_browserOptions.mediaplaybackrequiresuseraction == YES){
