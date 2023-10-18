@@ -83,7 +83,17 @@
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures
 {
   if (!navigationAction.targetFrame.isMainFrame) {
-    [webView loadRequest:navigationAction.request];
+    CGRect frame = CGRectMake(0, 0, webView.frame.size.width, webView.frame.size.height);
+
+    WKWebView *newWebView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
+    [webView addSubview:newWebView];
+
+    // Apply CSS to make the newWebView fit the window 100%
+    [newWebView evaluateJavaScript:@"document.body.style.margin = '0'; document.body.style.width = '100%'; document.body.style.height = '100%';" completionHandler:nil];
+
+    [newWebView loadRequest:navigationAction.request];
+
+    return newWebView;
   }
 
   return nil;
