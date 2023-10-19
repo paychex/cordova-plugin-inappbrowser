@@ -86,6 +86,7 @@
     CGRect frame = CGRectMake(0, 0, webView.frame.size.width, webView.frame.size.height);
 
     WKWebView *newWebView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
+    newWebView.tag = 76787;
     [webView addSubview:newWebView];
 
     // Apply CSS to make the newWebView fit the window 100%
